@@ -14,9 +14,7 @@ class CliTests(unittest.TestCase):
         )
 
     def test_default_standard_quotes(self):
-        for zone, expected in (("local", "$8.00
-"), ("regional", "$11.00
-")):
+        for zone, expected in (("local", "$8.00\n"), ("regional", "$11.00\n")):
             with self.subTest(zone=zone):
                 result = self.run_cli("2", zone)
                 self.assertEqual(result.returncode, 0, result.stderr)
@@ -25,13 +23,10 @@ class CliTests(unittest.TestCase):
     def test_explicit_standard_quote(self):
         result = self.run_cli("2", "local", "--service", "standard")
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(result.stdout, "$8.00
-")
+        self.assertEqual(result.stdout, "$8.00\n")
 
     def test_express_quotes(self):
-        for zone, expected in (("local", "$15.00
-"), ("regional", "$18.00
-")):
+        for zone, expected in (("local", "$15.00\n"), ("regional", "$18.00\n")):
             with self.subTest(zone=zone):
                 result = self.run_cli("2", zone, "--service", "express")
                 self.assertEqual(result.returncode, 0, result.stderr)
